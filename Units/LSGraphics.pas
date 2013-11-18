@@ -119,6 +119,7 @@ begin
   VMemoryStream := TMemoryStream.Create;
   try
     LSBase64StrToStream(ABase64Str, VMemoryStream);
+    VMemoryStream.Position := 0;
     APicture.LoadFromStream(VMemoryStream);
   finally
     VMemoryStream.Free;
@@ -127,11 +128,13 @@ end;
 
 function LSPictureToBase64(const APicture: TPicture): string;
 var
-  VMemoryStream: TStream;
+  VMemoryStream: TMemoryStream;
 begin
   VMemoryStream := TMemoryStream.Create;
   try
     APicture.SaveToStream(VMemoryStream);
+    //VMemoryStream.Position := 0;
+    //VMemoryStream.SaveToFile('d:\teste.png');
     Result := LSStreamToBase64Str(VMemoryStream);
   finally
     VMemoryStream.Free;
