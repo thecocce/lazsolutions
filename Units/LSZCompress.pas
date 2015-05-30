@@ -22,12 +22,7 @@ uses
   Classes, SysUtils, ZStream;
 
 type
-  TLSCompressionLevel = (
-    clNone,    { Do not use compression, just copy data. }
-    clFastest, { Use fast (but less) compression. }
-    clDefault, { Use default compression. }
-    clMax      { Use maximum compression. }
-    );
+  TLSCompressionLevel = ZStream.TCompressionLevel;
 
 { Compress a stream. }
 procedure LSZCompressStream(var AInStream, AOutStream: TStream;
@@ -50,7 +45,7 @@ implementation
 procedure LSZCompressStream(var AInStream, AOutStream: TStream;
   const ALSCompressionLevel: TLSCompressionLevel = clDefault);
 begin
-  with TCompressionStream.Create(TCompressionlevel(ALSCompressionLevel),
+  with TCompressionStream.Create(ALSCompressionLevel,
       AOutStream) do
     try
       CopyFrom(AInStream, AInStream.Size);
