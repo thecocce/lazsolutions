@@ -6290,7 +6290,7 @@ function TLSCustomMaskEdit.InternalValidate(const ACanFocus: Boolean): Boolean;
 var
   VString, VValidateMsg: string;
 begin
-  VString := inherited GetText;
+  VString := inherited Text;
   Result := FRequired and (VString = '');
   if Result then
     LaterValidation(SLSControlsRequiredFieldMsg)
